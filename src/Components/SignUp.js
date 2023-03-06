@@ -16,7 +16,7 @@ const SignUp = () => {
         
         obj.name=name;
         obj.password=password;
-        obj.email=email;
+        obj.mailId=email;
         obj.role=role;
         usersignup(obj)
         navigate("/")
