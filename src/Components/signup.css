@@ -1,0 +1,16 @@
+.signup-form{
+    height:500px;
+    width:600px;
+    border: 2px solid ;
+    margin: 30px 300px;
+    background-color: cadetblue;
+    text-decoration-color: darkgreen;
+}
+.signup-header{
+    height:100px;
+    width:600px;
+    border: 2px solid ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
