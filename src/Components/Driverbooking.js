@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import {useNavigate} from "react-router-dom"
 
-
+import "./driverbooking.css"
 const Driverbooking = () => {
     const[place,setPlace]=useState("")
     const[allrides,setAllrides]=useState(null)
@@ -18,6 +18,7 @@ const Driverbooking = () => {
    function submithandle(event)
     {
         event.preventDefault()
+        
         getrides(place)
 
     }
@@ -37,7 +38,7 @@ const Driverbooking = () => {
         } catch (error) {
             console.log(error)
         }
-       
+        window.alert("Ride Booked")
     }
     
     async function getrides(place)
@@ -65,10 +66,17 @@ const Driverbooking = () => {
        
     }
   return (
-      <div>
+      <div className='ride-container'>
+        <div className='form-container-driver'>
+        <div className="form-header-driver">
+            <h2>Search for Ride</h2>
+        </div>
+        <div className='form-body-driver'>
+
+        
           <form onSubmit={(event) => submithandle(event)}>
               <div className="row mb-3">
-                  <label className="col-sm-4 col-form-label">Places:<div className="col-sm-10">
+                  <label className="col-sm-4 col-form-label"><h6>Places:</h6><div className="col-sm-10">
                       <input type="text" className="form-control" onChange={(event) => { setPlace(event.target.value) }}></input>
                   </div></label>
 
@@ -79,20 +87,21 @@ const Driverbooking = () => {
           </form>
           <hr></hr>
           <div>
+          </div>
               {allrides &&
-
+               <div className='Booking-Container-driver'>
                   <div className='container-fluid'>
                       {allrides.map((e,i) => {
                             
                                 
                           return (
                             <div className='row border border-primary bg-light m-2 ' key={i}>
-                            <div className='col-2 text-dark'><span>Origin:{e.origin}</span></div>
-                            <div className='col-2 text-dark'><span>Destination:{e.destination}</span></div>
-                            <div className='col-2 text-dark'><span>pickuptime:{e.pickuptime}</span></div>
-                            <div className='col-2 text-dark '><span ><input type="text" placeholder='price' onChange={(event)=>setPrice(event.target.value)}></input></span></div>
-                            <div className='col-2 text-dark '><span className="p-1"><input type="text" placeholder="pickup-time" onChange={(event)=>setPickuptime(event.target.value)}></input></span></div>
-                            <div className='col-2 text-dark d-flex justify-content-center'><span ><button className="btn btn-primary" onClick={()=>acceptride(price,pickuptime,e._id)}>Book</button></span></div>
+                            <div className='col-2 text-dark '>Origin:{e.origin}</div>
+                            <div className='col-3 text-dark '>Destination:{e.destination} </div>
+                            <div className='col-2 text-dark '> pickuptime:{e.pickuptime}</div>
+                            <div className='col-1 text-dark '><input type="text" placeholder='price' onChange={(event)=>setPrice(event.target.value)}></input></div>
+                            <div className='col-2 text-dark '><input type="text" placeholder="pickup-time" onChange={(event)=>setPickuptime(event.target.value)}></input></div>
+                            <div className='col-2 text-dark d-flex justify-content-center'><button className="btn btn-primary" onClick={()=>acceptride(price,pickuptime,e._id)}>Book</button></div>
   
   
   
@@ -101,9 +110,11 @@ const Driverbooking = () => {
                       })}
                      
 
+                  </div>
                   </div>}
           </div>
           {bookingavail&&<p>No Rides Available For this Place!</p>}
+          </div>
       </div>
   )
 }

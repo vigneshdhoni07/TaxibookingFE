@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+import "./userbooking.css"
 const Userbooking = () => {
     const[origin,setOrigin]=useState(null)
     const[destination,setDestination]=useState(null)
@@ -10,6 +11,10 @@ const Userbooking = () => {
     var tok=sessionStorage.getItem("jwto")
     const[userride,setUserride]=useState(null)
    
+    function booknow()
+    {
+        window.alert("Ride Confirmed!")
+    }
    
     var navigate=useNavigate()
     function logout()
@@ -50,6 +55,7 @@ const Userbooking = () => {
         obj.destination=destination
         obj.pickuptime=pickuptime
         bookaride(obj)
+        window.alert("Ride Booked")
     }
     
    
@@ -67,7 +73,12 @@ const Userbooking = () => {
     }
   return (
     <div>
-    {(userride && <div className="container border border-success">{userride.map((e,i)=>{
+    {(userride && <div className="booking-container">
+        <div className="booking-header">
+        <h4>Booking Confirmation!</h4>
+        </div>
+        
+        {userride.map((e,i)=>{
         return(
             <div key={i}>
             <div className="row m-2">
@@ -88,6 +99,13 @@ const Userbooking = () => {
             <div className="row m-2 ">
             <div className='col-4 m-1'>
                 Price:<span>{e.price}</span>
+               
+            </div>
+            </div>
+            <div className="row m-2 ">
+            <div className='col-4 m-1'>
+                PaymentMode:<span>Cash</span>
+               
             </div>
             </div>
             <div className="row m-2">
@@ -96,29 +114,34 @@ const Userbooking = () => {
             </div>
             </div>
             <div className="row m-2">
-            <div className='col-4 m-1'>
-                <span><button className='m-1'>BookNow</button></span>
-                <span><button className='m-1' onClick={()=>logout()}>LogOut</button></span>
+            <div className='col-4 ' id="button-flex">
+                <button className='btn btn-primary m-2'onClick={()=>booknow()}>BookNow</button>
+                <button className='btn btn-primary m-2' onClick={()=>logout()}>LogOut</button>
             </div>
             </div>
         </div>
             
         )
-    })}</div> )||<form onSubmit={(event)=>submithandle(event)}>
+    })}</div> )||<div className='form-container'>
+    <div className='form-header'>
+        <h3>Book a Ride!</h3>
+    </div>
+    <div className='form-body'>
+        <form onSubmit={(event)=>submithandle(event)}>
     <div className="row mb-3">
-      <label  className="col-sm-4 col-form-label">Origin:<div className="col-sm-10">
+      <label  className="col-sm-10 col-form-label">Origin:<div className="col-sm-12">
         <input type="text" className="form-control"  onChange={(event)=>{setOrigin(event.target.value)}}></input>
       </div></label>
       
     </div>
     <div className="row mb-3">
-      <label className="col-sm-4 col-form-label">Destination:<div className="col-sm-10">
+      <label className="col-sm-10 col-form-label">Destination:<div className="col-sm-12">
         <input type="text" className="form-control"  onChange={(event)=>{setDestination(event.target.value)}}></input>
       </div> </label>
       
     </div>
     <div className="row mb-3">
-      <label className="col-sm-4 col-form-label">PickupTime:<div className="col-sm-10">
+      <label className="col-sm-10 col-form-label">PickupTime:<div className="col-sm-12">
         <input type="text" className="form-control" id="inputPassword3" onChange={(event)=>{setPickuptime(event.target.value)}}></input>
       </div> </label>
       
@@ -127,7 +150,9 @@ const Userbooking = () => {
    
     <button type="submit" className="btn btn-primary m-1">Book Now</button>
     <button type="button" className="btn btn-primary m-1" onClick={()=>logout()}>LogOut</button>
-  </form>}
+  </form>
+  </div>
+  </div>}
   </div>
     
   )

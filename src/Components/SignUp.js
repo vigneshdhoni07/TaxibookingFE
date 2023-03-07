@@ -23,7 +23,7 @@ const SignUp = () => {
     }
     
     
-    async function usersignup(obj)
+    async function usersignup(obj) 
     {
         try {
             var newuser=await axios.post("http://localhost:8000/Taxibooking/Signin",obj)
@@ -37,39 +37,40 @@ const SignUp = () => {
     <div>
       <div className='signup-form'>
       <div className='signup-header'>
-      <h3>Welcome to Taxibooking App!</h3>
+      <h3>SignUp!</h3>
       </div>
     <div className='signup-body'>
         <form onSubmit={(event)=>submithandle(event)}>
   <div className="row mb-3">
-    <label  className="col-sm-10 col-form-label">Name:<div className="col-sm-10">
+    <label  className="col-sm-8 col-form-label ">Name:<div className="col-sm-12 ">
       <input type="text" className="form-control"  onChange={(event)=>{setName(event.target.value)}}></input>
     </div></label>
     
   </div>
   <div className="row mb-3">
-    <label className="col-sm-10 col-form-label">Password:<div className="col-sm-10">
+    <label className="col-sm-8 col-form-label ">Password:<div className="col-sm-12 ">
       <input type="password" className="form-control" id="inputPassword3" onChange={(event)=>{setPassword(event.target.value)}}></input>
     </div> </label>
     
   </div>
   <div className="row mb-3">
-    <label className="">Email:<div className="col-sm-10">
+    <label className="col-sm-8 col-form-label ">Email:<div className="col-sm-12 ">
       <input type="email" className="form-control"  onChange={(event)=>{setEmail(event.target.value)}}></input>
     </div> </label>
     
   </div>
   <div className="col-auto">
-    <label className="col-sm-10 col-form-label" >Role:
+    <label className="col-sm-4 col-form-label p-2" >Role:
     <select className="form-select" id="autoSizingSelect" onChange={(event)=>{setRole(event.target.value)}}>
       
       <option value="user">user</option>
       <option value="driver">driver</option>
       
     </select></label>
+    <button type="submit" className="btn btn-primary m-2">Sign up</button>
   </div>
  
-  <button type="submit" className="btn btn-primary">Sign up</button>
+  
 </form>
     </div>
     </div>
